@@ -1,0 +1,756 @@
+
+<html>
+<head>
+<title>Java Concurrency Stress test report</title>
+ <style type="text/css">
+   * { font-family: Arial; }
+   table { font-size: 9pt; }
+   a { color: #000000; }
+   .progress { padding: 0px; }
+   .header { text-align: left; }
+   .section1 { font-size: 12pt; background-color: #BDB76B; color: #000000; font-weight: bold;}
+   .section2 { font-size: 12pt; background-color: #F0E68C; color: #000000; font-weight: bold;}
+   .cell1 { background-color: #FAFAD2; }
+   .cell2 { background-color: #EEE8AA; }
+   .passedProgress { background-color: #00AA00; color: #FFFFFF; text-align: center; font-weight: bold; }
+   .failedProgress { background-color: #FF0000; color: #FFFFFF; text-align: center; font-weight: bold; }
+   .passed { color: #00AA00; text-align: center; font-weight: bold; }
+   .failed { color: #FF0000; text-align: center; font-weight: bold; }
+   .interesting { color: #0000FF; text-align: center; font-weight: bold; }
+   .spec { color: #AAAA00; text-align: center; font-weight: bold; }
+   .endResult { font-size: 48pt; text-align: center; font-weight: bold; }
+ </style>
+</head>
+<body>
+<h1>org.example.jcstress.FifoOrder</h1>
+<h3>Description and references</h3>
+<p>Проверяет, что элементы возвращаются в порядке FIFO.</p>
+<h3>Environment</h3>
+<table>
+<tr>
+<td nowrap>java.specification.name</td>
+<td nowrap>Java Platform API Specification</td>
+</tr>
+<tr>
+<td nowrap>java.specification.vendor</td>
+<td nowrap>Oracle Corporation</td>
+</tr>
+<tr>
+<td nowrap>java.specification.version</td>
+<td nowrap>17</td>
+</tr>
+<tr>
+<td nowrap>java.vendor</td>
+<td nowrap>Microsoft</td>
+</tr>
+<tr>
+<td nowrap>java.version</td>
+<td nowrap>17.0.17</td>
+</tr>
+<tr>
+<td nowrap>java.vm.name</td>
+<td nowrap>OpenJDK 64-Bit Server VM</td>
+</tr>
+<tr>
+<td nowrap>java.vm.vendor</td>
+<td nowrap>Microsoft</td>
+</tr>
+<tr>
+<td nowrap>java.vm.version</td>
+<td nowrap>17.0.17+10-LTS</td>
+</tr>
+<tr>
+<td nowrap>os.arch</td>
+<td nowrap>amd64</td>
+</tr>
+<tr>
+<td nowrap>os.name</td>
+<td nowrap>Windows 11</td>
+</tr>
+<tr>
+<td nowrap>os.version</td>
+<td nowrap>10.0</td>
+</tr>
+</table>
+<h3>Results</h3>
+<table cellpadding=5 border=1>
+<tr>
+<th>Compilation Mode</th>
+<th>Scheduling Class</th>
+<th>Java Options</th>
+<th>Status</th>
+<th colspan=4>Observed States</th>
+</tr>
+<tr>
+<th colspan=4></th>
+<th nowrap align='center'>0, 0</th>
+<th nowrap align='center'>0, 1</th>
+<th nowrap align='center'>1, 0</th>
+<th nowrap align='center'>1, 2</th>
+</tr>
+<tr>
+<td colspan=4></td>
+<td>Acceptable</td>
+<td>Acceptable</td>
+<td>Acceptable</td>
+<td>Acceptable</td>
+</tr>
+<tr>
+<td colspan=4></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: Interpreter
+    c1: Interpreter
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>724228</td>
+<td align='right' width='25.0%' bgColor=#00ff00>2411</td>
+<td align='right' width='25.0%' bgColor=#00ff00>828</td>
+<td align='right' width='25.0%' bgColor=#00ff00>648381</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: Interpreter
+    c1: Interpreter
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>348315</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1759</td>
+<td align='right' width='25.0%' bgColor=#00ff00>571</td>
+<td align='right' width='25.0%' bgColor=#00ff00>344428</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C1
+    c1: Interpreter
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>71300</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1330</td>
+<td align='right' width='25.0%' bgColor=#00ff00>102</td>
+<td align='right' width='25.0%' bgColor=#00ff00>871946</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C1
+    c1: Interpreter
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>82767</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1628</td>
+<td align='right' width='25.0%' bgColor=#00ff00>126</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1521373</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: Interpreter
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>44784</td>
+<td align='right' width='25.0%' bgColor=#00ff00>5228</td>
+<td align='right' width='25.0%' bgColor=#00ff00>684</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1440286</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: Interpreter
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=832143312]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>23877</td>
+<td align='right' width='25.0%' bgColor=#00ff00>925</td>
+<td align='right' width='25.0%' bgColor=#00ff00>36</td>
+<td align='right' width='25.0%' bgColor=#00ff00>658548</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: Interpreter
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=619400720]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>47154</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1393</td>
+<td align='right' width='25.0%' bgColor=#00ff00>61</td>
+<td align='right' width='25.0%' bgColor=#00ff00>662996</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: Interpreter
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>82125</td>
+<td align='right' width='25.0%' bgColor=#00ff00>906</td>
+<td align='right' width='25.0%' bgColor=#00ff00>90</td>
+<td align='right' width='25.0%' bgColor=#00ff00>723394</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: Interpreter
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=840265428]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>6319</td>
+<td align='right' width='25.0%' bgColor=#00ff00>9</td>
+<td align='right' width='25.0%' bgColor=#00ff00>2</td>
+<td align='right' width='25.0%' bgColor=#00ff00>49914</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: Interpreter
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=1123561025]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>38043</td>
+<td align='right' width='25.0%' bgColor=#00ff00>834</td>
+<td align='right' width='25.0%' bgColor=#00ff00>73</td>
+<td align='right' width='25.0%' bgColor=#00ff00>490894</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: Interpreter
+    c1: C1
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1524676</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1157</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1455</td>
+<td align='right' width='25.0%' bgColor=#00ff00>138766</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: Interpreter
+    c1: C1
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1149937</td>
+<td align='right' width='25.0%' bgColor=#00ff00>918</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1339</td>
+<td align='right' width='25.0%' bgColor=#00ff00>139781</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C1
+    c1: C1
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>589731</td>
+<td align='right' width='25.0%' bgColor=#00ff00>4538</td>
+<td align='right' width='25.0%' bgColor=#00ff00>2037</td>
+<td align='right' width='25.0%' bgColor=#00ff00>782036</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C1
+    c1: C1
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>588822</td>
+<td align='right' width='25.0%' bgColor=#00ff00>2389</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1350</td>
+<td align='right' width='25.0%' bgColor=#00ff00>867701</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C1
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1075603</td>
+<td align='right' width='25.0%' bgColor=#00ff00>3154</td>
+<td align='right' width='25.0%' bgColor=#00ff00>2233</td>
+<td align='right' width='25.0%' bgColor=#00ff00>232022</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C1
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=131175241]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>374274</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1309</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1034</td>
+<td align='right' width='25.0%' bgColor=#00ff00>199249</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C1
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=2055220794]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>59834</td>
+<td align='right' width='25.0%' bgColor=#00ff00>108</td>
+<td align='right' width='25.0%' bgColor=#00ff00>38</td>
+<td align='right' width='25.0%' bgColor=#00ff00>88515</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C1
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>2336165</td>
+<td align='right' width='25.0%' bgColor=#00ff00>7877</td>
+<td align='right' width='25.0%' bgColor=#00ff00>4750</td>
+<td align='right' width='25.0%' bgColor=#00ff00>328700</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C1
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=1116856351]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>459972</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1475</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1098</td>
+<td align='right' width='25.0%' bgColor=#00ff00>174761</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C1
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=671534127]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>526929</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1848</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1283</td>
+<td align='right' width='25.0%' bgColor=#00ff00>173806</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: Interpreter
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1400355</td>
+<td align='right' width='25.0%' bgColor=#00ff00>721</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1133</td>
+<td align='right' width='25.0%' bgColor=#00ff00>126226</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: Interpreter
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=312301022]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>570475</td>
+<td align='right' width='25.0%' bgColor=#00ff00>382</td>
+<td align='right' width='25.0%' bgColor=#00ff00>504</td>
+<td align='right' width='25.0%' bgColor=#00ff00>86750</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: Interpreter
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=148238511]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>280438</td>
+<td align='right' width='25.0%' bgColor=#00ff00>131</td>
+<td align='right' width='25.0%' bgColor=#00ff00>254</td>
+<td align='right' width='25.0%' bgColor=#00ff00>90243</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: Interpreter
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1373720</td>
+<td align='right' width='25.0%' bgColor=#00ff00>880</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1162</td>
+<td align='right' width='25.0%' bgColor=#00ff00>255479</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: Interpreter
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=166913784]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>468528</td>
+<td align='right' width='25.0%' bgColor=#00ff00>364</td>
+<td align='right' width='25.0%' bgColor=#00ff00>425</td>
+<td align='right' width='25.0%' bgColor=#00ff00>50287</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: Interpreter
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=693222264]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>278367</td>
+<td align='right' width='25.0%' bgColor=#00ff00>192</td>
+<td align='right' width='25.0%' bgColor=#00ff00>234</td>
+<td align='right' width='25.0%' bgColor=#00ff00>84593</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C1
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>890079</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1812</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1168</td>
+<td align='right' width='25.0%' bgColor=#00ff00>354383</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C1
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=899847970]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>529775</td>
+<td align='right' width='25.0%' bgColor=#00ff00>3678</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1039</td>
+<td align='right' width='25.0%' bgColor=#00ff00>203827</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C1
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=2070324104]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>790193</td>
+<td align='right' width='25.0%' bgColor=#00ff00>2737</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1142</td>
+<td align='right' width='25.0%' bgColor=#00ff00>213479</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C1
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>2330410</td>
+<td align='right' width='25.0%' bgColor=#00ff00>4081</td>
+<td align='right' width='25.0%' bgColor=#00ff00>3322</td>
+<td align='right' width='25.0%' bgColor=#00ff00>388984</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C1
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=308421136]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>51840</td>
+<td align='right' width='25.0%' bgColor=#00ff00>136</td>
+<td align='right' width='25.0%' bgColor=#00ff00>57</td>
+<td align='right' width='25.0%' bgColor=#00ff00>106553</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C1
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=2000742806]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>33612</td>
+<td align='right' width='25.0%' bgColor=#00ff00>151</td>
+<td align='right' width='25.0%' bgColor=#00ff00>47</td>
+<td align='right' width='25.0%' bgColor=#00ff00>86376</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>655959</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1488</td>
+<td align='right' width='25.0%' bgColor=#00ff00>975</td>
+<td align='right' width='25.0%' bgColor=#00ff00>244035</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=1216877786]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>377898</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1130</td>
+<td align='right' width='25.0%' bgColor=#00ff00>574</td>
+<td align='right' width='25.0%' bgColor=#00ff00>124909</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:+UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=608255814]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>511323</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1199</td>
+<td align='right' width='25.0%' bgColor=#00ff00>889</td>
+<td align='right' width='25.0%' bgColor=#00ff00>183100</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1002620</td>
+<td align='right' width='25.0%' bgColor=#00ff00>2753</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1824</td>
+<td align='right' width='25.0%' bgColor=#00ff00>390769</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=778766259]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>50093</td>
+<td align='right' width='25.0%' bgColor=#00ff00>41</td>
+<td align='right' width='25.0%' bgColor=#00ff00>25</td>
+<td align='right' width='25.0%' bgColor=#00ff00>119222</td>
+</tr>
+<tr>
+<td nowrap valign=top width=10><pre>split
+    p1: C2
+    c1: C2
+</pre></td>
+<td nowrap valign=top width=10><pre>    p1: package group free, core group free
+    c1: package group free, core group free
+</pre></td>
+<td        valign=top width=10>
+<pre>[-javaagent:C:\Program Files\JetBrains\IntelliJIdea2025.2\lib\idea_rt.jar=54715, -Dfile.encoding=UTF-8, -XX:-UseBiasedLocking, -XX:+StressLCM, -XX:+StressGCM, -XX:+StressIGVN, -XX:+StressCCP, -XX:StressSeed=1492301223]</pre>
+</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='right' width='25.0%' bgColor=#00ff00>272568</td>
+<td align='right' width='25.0%' bgColor=#00ff00>1047</td>
+<td align='right' width='25.0%' bgColor=#00ff00>596</td>
+<td align='right' width='25.0%' bgColor=#00ff00>214940</td>
+</tr>
+</table>
+<h3>Messages</h3>
+<h3>VM Output Streams</h3>
+<h3>VM Error Streams</h3>
+</body>
+</html>
