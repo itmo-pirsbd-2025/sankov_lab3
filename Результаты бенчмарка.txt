@@ -1,0 +1,19 @@
+Benchmark                                (opsPerProducer)  (threads)  Mode  Cnt     Score      Error  Units
+QueueBenchmark.benchmark1_slowQueue                100000          4  avgt    3    63,830 ±   20,869  ms/op
+QueueBenchmark.benchmark1_slowQueue                100000          8  avgt    3   126,864 ±   76,523  ms/op
+QueueBenchmark.benchmark1_slowQueue                100000         16  avgt    3   260,692 ±  226,922  ms/op
+QueueBenchmark.benchmark1_slowQueue                500000          4  avgt    3   315,729 ±  148,687  ms/op
+QueueBenchmark.benchmark1_slowQueue                500000          8  avgt    3   638,494 ±  356,901  ms/op
+QueueBenchmark.benchmark1_slowQueue                500000         16  avgt    3  1245,570 ± 1071,468  ms/op
+QueueBenchmark.benchmark1_slowQueue               1000000          4  avgt    3   621,970 ±  536,594  ms/op
+QueueBenchmark.benchmark1_slowQueue               1000000          8  avgt    3  1202,270 ± 1213,371  ms/op
+QueueBenchmark.benchmark1_slowQueue               1000000         16  avgt    3  2527,574 ±   41,470  ms/op
+QueueBenchmark.benchmark2_lockFreeQueue            100000          4  avgt    3    55,290 ±   16,500  ms/op
+QueueBenchmark.benchmark2_lockFreeQueue            100000          8  avgt    3    86,092 ±   37,046  ms/op
+QueueBenchmark.benchmark2_lockFreeQueue            100000         16  avgt    3   215,431 ±  358,212  ms/op
+QueueBenchmark.benchmark2_lockFreeQueue            500000          4  avgt    3   264,886 ±  128,482  ms/op
+QueueBenchmark.benchmark2_lockFreeQueue            500000          8  avgt    3   367,005 ±  178,645  ms/op
+QueueBenchmark.benchmark2_lockFreeQueue            500000         16  avgt    3   782,976 ±  309,704  ms/op
+QueueBenchmark.benchmark2_lockFreeQueue           1000000          4  avgt    3   518,517 ±  949,109  ms/op
+QueueBenchmark.benchmark2_lockFreeQueue           1000000          8  avgt    3   744,781 ±  101,939  ms/op
+QueueBenchmark.benchmark2_lockFreeQueue           1000000         16  avgt    3  1542,147 ±  949,018  ms/op
