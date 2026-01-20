@@ -1,46 +1,41 @@
 package org.example.jcstress;
 
-import org.example.ConcurrentQueue;
 import org.example.LockFreeQueue;
 import org.openjdk.jcstress.annotations.*;
 import org.openjdk.jcstress.infra.results.II_Result;
 
 @JCStressTest
-@Outcome(id = "0, 0", expect = Expect.ACCEPTABLE,
-        desc = "Оба consumer'а выполнились до enqueue.")
-@Outcome(id = "1, 0", expect = Expect.ACCEPTABLE,
-        desc = "Только один consumer получил элемент.")
-@Outcome(id = "0, 1", expect = Expect.ACCEPTABLE,
-        desc = "Только один consumer получил элемент.")
-@Outcome(id = "1, 1", expect = Expect.ACCEPTABLE,
-        desc = "Оба consumer'а получили элементы.")
-@Outcome(expect = Expect.FORBIDDEN,
-        desc = "Любое другое состояние недопустимо.")
+@Outcome(id = "0, 0", expect = Expect.ACCEPTABLE, desc = "все consum'ы до enqueue")
+@Outcome(id = "1, 0", expect = Expect.ACCEPTABLE, desc = "первый consumer взял")
+@Outcome(id = "0, 1", expect = Expect.ACCEPTABLE, desc = "второй consumer взял")
+@Outcome(id = "1, 1", expect = Expect.ACCEPTABLE, desc = "оба consum'а по элементу")
+@Outcome(expect = Expect.FORBIDDEN, desc = "остальное - баг!")
 @State
 public class EnqueueDequeue {
 
-    private final LockFreeQueue<Integer> q = new LockFreeQueue<>();
+    LockFreeQueue<Integer> queue = new LockFreeQueue<>();
 
     @Actor
-    public void p1() {
-        q.enqueue(1);
+    void actor1() {
+        queue.enqueue(1);
     }
 
     @Actor
-    public void p2() {
-        q.enqueue(2);
+    void actor2() {
+        queue.enqueue(2);
     }
 
     @Actor
-    public void c1(II_Result r) {
-        Integer v = q.dequeue();
-        if (v != null) r.r1 = 1;
+    void consumer1(II_Result res) {
+        Integer x = queue.dequeue();
+        if (x != null) {
+            res.r1 = 1;
+        }
     }
 
     @Actor
-    public void c2(II_Result r) {
-        Integer v = q.dequeue();
-        if (v != null) r.r2 = 1;
+    void consumer2(II_Result res) {
+        Integer y = queue.dequeue();
+        if (y != null) res.r2 = 1;
     }
 }
-

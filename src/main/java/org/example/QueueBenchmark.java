@@ -9,90 +9,84 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Warmup(iterations = 2, time = 1)
-@Measurement(iterations = 3, time = 1)
+@Warmup(iterations = 2)
+@Measurement(iterations = 3)
+@Fork(1)
 @State(Scope.Thread)
-@Fork(value = 1)
 public class QueueBenchmark {
 
-    private SlowConcurrentQueue<Integer> slowQueue;
-    private LockFreeQueue<Integer> lockFreeQueue;
+    SlowConcurrentQueue<Integer> slowQ;
+    LockFreeQueue<Integer> fastQ;
 
     @Param({"100000", "500000", "1000000"})
-    private int opsPerProducer;
+    int size;
 
     @Param({"4", "8", "16"})
-    private int threads;
+    int nThreads;
 
-    private ExecutorService executor;
+    ExecutorService pool;
 
-    @Setup(Level.Invocation)
-    public void setUp() {
-        slowQueue = new SlowConcurrentQueue<>();
-        lockFreeQueue = new LockFreeQueue<>();
-        executor = Executors.newFixedThreadPool(threads * 2);
+    @Setup public void up() {
+        slowQ = new SlowConcurrentQueue<>();
+        fastQ = new LockFreeQueue<>();
+        pool = Executors.newFixedThreadPool(nThreads);
     }
 
-    @TearDown(Level.Invocation)
-    public void tearDown() {
-        executor.shutdownNow();
+    @TearDown public void down() {
+        pool.shutdown();
     }
 
-    private void runQueueBenchmark(ConcurrentQueue<Integer> queue) throws InterruptedException {
-        int producersCount = threads;
-        int consumersCount = threads;
-        CountDownLatch latch = new CountDownLatch(producersCount + consumersCount);
-        AtomicInteger producedCounter = new AtomicInteger();
-        AtomicInteger consumedCounter = new AtomicInteger();
+    void testQ(ConcurrentQueue<Integer> q) throws Exception {
+        int prods = nThreads;
+        int cons = nThreads;
 
-        // Producers
-        for (int i = 0; i < producersCount; i++) {
-            final int threadId = i;
-            executor.submit(() -> {
-                for (int j = 0; j < opsPerProducer; j++) {
-                    queue.enqueue(threadId * opsPerProducer + j);
-                    producedCounter.incrementAndGet();
+        CountDownLatch done = new CountDownLatch(prods + cons);
+        AtomicInteger sent = new AtomicInteger(), got = new AtomicInteger();
+
+        for (int i = 0; i < prods; i++) {
+            int id = i;
+            pool.submit(() -> {
+                for (int j = 0; j < size; j++) {
+                    q.enqueue(id * size + j);
+                    sent.getAndIncrement();
                 }
-                latch.countDown();
+                done.countDown();
             });
         }
 
-        // Consumers
-        for (int i = 0; i < consumersCount; i++) {
-            executor.submit(() -> {
-                int localConsumed = 0;
-                while (consumedCounter.get() < producersCount * opsPerProducer) {
-                    Integer val = queue.dequeue();
-                    if (val != null) {
-                        consumedCounter.incrementAndGet();
-                        localConsumed++;
+        for (int i = 0; i < cons; i++) {
+            pool.submit(() -> {
+                while (got.get() < prods * size) {
+                    Integer x = q.dequeue();
+                    if (x != null) got.incrementAndGet();
+                    else {
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
-                latch.countDown();
+                done.countDown();
             });
         }
 
-        latch.await();
+        done.await(30, TimeUnit.SECONDS);
     }
 
     @Benchmark
-    public void benchmark1_slowQueue() throws InterruptedException {
-        runQueueBenchmark(slowQueue);
+    public void slow() throws Exception {
+        testQ(slowQ);
     }
 
     @Benchmark
-    public void benchmark2_lockFreeQueue() throws InterruptedException {
-        runQueueBenchmark(lockFreeQueue);
+    public void fast() throws Exception {
+        testQ(fastQ);
     }
 
-    public static void main(String[] args) throws Exception {
-        Options opt = new OptionsBuilder()
+    public static void main(String[] ignore) throws Exception {
+        new Runner(new OptionsBuilder()
                 .include(QueueBenchmark.class.getSimpleName())
-                .forks(1)
-                .warmupIterations(2)
-                .measurementIterations(3)
-                .build();
-
-        new Runner(opt).run();
+                .build()).run();
     }
 }
